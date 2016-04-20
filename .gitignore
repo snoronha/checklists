@@ -1,0 +1,4 @@
+# Build, Archive directory
+index.html
+build/
+node_modules/
