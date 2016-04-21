@@ -14,55 +14,13 @@
                 busy: false,
                 editor: 'text',
                 language: 'javascript',
-                tab: $routeParams.tab || 'Problem',
-                problem_number: $routeParams.problem_number || null,
-                problem: null,
+                tab: $routeParams.tab || 'Buy Home',
             };
             
-            if ( $routeParams.problem_number ) { // Get problem definition
-                User.getProblem( $routeParams.problem_number, function( resp ) {
-                    if ( resp.data ) {
-                        $scope.editorSettings.problem = resp.data;
-                    }
-                });
-            }
-
             $scope.changeTab = function( tab ) {
                 $scope.editorSettings.tab = tab;
-                // $location.path( '/editor/' + tab );
             };
             
-            $scope.initEditor = function() {
-                if ( $scope.editorSettings.initDone ) {
-                    return;
-                }
-                $log.log( "Init editor!" );
-                $scope.editorSettings.initDone = true;
-            };
-
-            $scope.submitCode = function() {
-                var codeSnippet = $scope.streams.editor.getValue();
-                $scope.editorSettings.busy = true;
-                $scope.streams.stdout.setValue( "" );
-                User.executeScript( 
-                    codeSnippet, $scope.editorSettings.problem, $scope.editorSettings.language,
-                    function( scriptReturn ) {
-                        $scope.streams.stdout.setValue( scriptReturn.message );
-                        // $scope.streams.editor.focus();
-                        $scope.editorSettings.busy = false;
-                        if ( $scope.editorSettings.problem &&
-                             $scope.editorSettings.problem.output == scriptReturn.message.trim() ) {
-                            $log.log( "YAY! Output Matched!" );
-                        }
-                    },
-                    function( scriptErr ) {
-                        $scope.streams.stdout.setValue( scriptErr );
-                        // $scope.streams.editor.focus();
-                        $scope.editorSettings.busy = false;
-                    }
-                );
-            };
-                
             $scope.openRight = function() {
                 if ( ! $scope.isOpenRight()) {
                     $scope.toggleRight();

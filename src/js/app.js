@@ -25,13 +25,13 @@
                     templateUrl: 'src/partials/register.html',
                     controller: 'registerCtrl'
                 })
-                .when('/editor', {
-                    templateUrl: 'src/partials/editor.html',
-                    controller: 'editorCtrl'
+                .when('/startup', {
+                    templateUrl: 'src/partials/startup.html',
+                    controller: 'startupCtrl'
                 })
-                .when('/editor/:problem_number/:tab?', {
-                    templateUrl: 'src/partials/editor.html',
-                    controller: 'editorCtrl'
+                .when('/buy_home', {
+                    templateUrl: 'src/partials/buy_home.html',
+                    controller: 'buyHomeCtrl'
                 })
                 .otherwise({
                     redirectTo: '/home'
