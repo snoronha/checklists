@@ -2,229 +2,24 @@
 
 <div layout="row" ng-cloak>
 
-
   <md-content flex-offset="5" flex="90" layout-padding>
     
     <md-tabs md-dynamic-height md-border-bottom>
 
-      <!-- Problem Tab -->
-      <md-tab label="team" md-on-select="changeTab('team');"
-              md-active="! editorSettings.tab || editorSettings.tab === 'team'">
+      <md-tab ng-repeat="(tabKey, tabVal) in editorSettings.list" label="{{tabKey}}"
+	      md-on-select="changeTab('{{tabKey}}');"
+              md-active="! editorSettings.tab || editorSettings.tab === '{{tabKey}}'">
 	<md-content class="md-padding">
-
-          <md-list>
-            <h3>Team</h3>
-            <div layout="row"
-                          ng-repeat="item in [
-				     {name: 'Is it an A+ team?'}, 
-				     {name: 'Does team have relevant experience?'},
-				     {name: 'Is team complete?'},
-				     {name: 'Can this team hire people?'},
-				     {name: 'Is this colocated?'},
-				     {name: 'Is team located is location of primary market?'},
-				     {name: 'Will you have to hire CEO?'},
-				     {name: 'Is team committed to working full-time on this?'},
-				     {name: 'Reference check on the team'},
-				     {name: 'Is there a prior relationship with team?'},
-				     {name: 'Gaps in Founding team'},
-				     {name: 'Quality of hired team'},
-				     {name: 'Churn in team'},
-				     {name: 'Glassdoor rating of team'},
-				     {name: 'Is team motivated by personal reasons?'},
-				     {name: 'Passion of the team'},
-				     {name: 'Do you believe in values of the team?'},
-				     {name: 'Will this team be agile?'},
-				     {name: 'Can this team scale with company scale?'}
-				     ]">
-              <div flex="70">{{ item.name }} </div>
+          <md-list ng-repeat="(tabName, tabData) in tabVal">
+            <h3>{{tabName}}</h3>
+            <div layout="row" ng-repeat="item in tabData">
+              <div flex="70">{{ item }} </div>
               <div flex>
 		<md-checkbox aria-label="answer 1"></md-checkbox>
 	      </div>
             </div>
           </md-list>
 	</md-content>
-      </md-tab>
-
-      <md-tab label="market" md-on-select="changeTab('market');"
-              md-active="editorSettings.tab === 'market'">
-        <md-content class="md-padding">
-
-	  <md-list>
-            <h3>Market</h3>
-            <div layout="row"
-                 ng-repeat="item in [
-			    {name: 'What is the size of total market?'}, 
-			    {name: 'What is the size of addressable market with current offering?'},
-			    {name: 'Is product/company dependent on (few) other companies?'},
-			    {name: 'Existing market vs New market'},
-			    {name: 'Competitors - Inhouse people?'},
-			    {name: 'Competitors - Boutique firms?'},
-			    {name: 'Competitors - well funded startups?'},
-			    {name: 'Competitors - Large companies?'},
-			    {name: 'Anti Market - Who will loose if you succeed?'},
-			    {name: 'Anti Market - What can be negative positioning around this company?'},
-			    {name: 'Are there tail winds supporting this?'},
-			    {name: 'Are there headwinds that will deter this company?'},
-			    ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="answer 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-
-        </md-content>
-      </md-tab>
-
-      <md-tab label="exit" md-on-select="changeTab('exit');"
-              md-active="editorSettings.tab === 'exit'">
-        <md-content class="md-padding">
-	  <md-list>
-            <h3>Exit</h3>
-            <div layout="row"
-                 ng-repeat="item in [
-			    {name: 'Can this be an independent company?'}, 
-			    {name: 'Public company - Can this go public?'},
-			    {name: 'Public Company - Is revenue going to be predictable?'},
-			    {name: 'Public Company - Is revenue going to be lumpy?'},
-			    {name: 'Does this fit in the vision of large companies?'},
-			    {name: 'Can you see this getting acquired by a large company?'},
-			    {name: 'Can this exit just for talent?'},
-			    {name: 'Can this exit just for technology/product?'},
-			    ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="answer 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-
-        </md-content>
-      </md-tab>
-
-
-      <md-tab label="product" md-on-select="changeTab('product');"
-              md-active="editorSettings.tab === 'product'">
-        <md-content class="md-padding">
-	  <md-list>
-            <h3>Product</h3>
-            <div layout="row"
-                 ng-repeat="item in [
-			    {name: 'Is this solving a real need?'}, 
-			    {name: 'Is this better done \as a feature of existing product?'},
-			    {name: 'Is integration complex?'},
-			    {name: 'Can it be tried easily?'},
-			    {name: 'Does It require critical mass to succeed?'},
-			    {name: 'Is product simple to explain?'},
-			    {name: 'Can \'anyone\' sell this product or requires special skill set to sell?'},
-			    {name: 'Will this meaningfully change the world?'},
-			    {name: 'Can you test the idea easily?'},
-			    {name: 'Will you be proud to be associated with this company?'},
-			    {name: 'Are you passionate about the end-game?'},
-			    ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="answer 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-        </md-content>
-      </md-tab>
-
-      <md-tab label="go-to-market" md-on-select="changeTab('go-to-market');"
-              md-active="editorSettings.tab === 'go-to-market'">
-        <md-content class="md-padding">
-	  <md-list>
-            <h3>Go-To-Market</h3>
-            <div layout="row"
-                 ng-repeat="item in [
-			    {name: 'Is their virality associated with this?'}, 
-			    {name: 'Can you build community around it?'},
-			    {name: 'Who is the buyer?'},
-			    {name: 'Is buyer same \as user?'},
-			    {name: 'Will purchase of this product require many approvals?'},
-			    {name: 'Is it an ad-supported product?'},
-			    {name: 'Is pricing in line with value prop of the product?'},
-			    {name: 'Will agencies be interested in selling this/Channel partnership opportunities?'},
-			    ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="answer 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-        </md-content>
-      </md-tab>
-
-      <md-tab label="valuation" md-on-select="changeTab('valuation');"
-              md-active="editorSettings.tab === 'valuation'">
-        <md-content class="md-padding">
-	  <md-list>
-            <h3>Valuation</h3>
-            <div layout="row"
-                 ng-repeat="item in [
-			    {name: 'In line with stage of the company?'},
-			    {name: 'In line with public market valuations?'},
-			    {name: 'In line with similar companies that got funded?'},
-			    ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="answer 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-	  
-	  <md-list>
-            <h3>Unit Economics</h3>
-            <div layout="row"
-                 ng-repeat="item in [
-			    {name: 'What is cost of customer acquisition?'},
-			    {name: 'What is cost of serving customer?'},
-			    {name: 'What is LTV of customer?'},
-			    {name: 'What is cost of goods sold?'},
-			    {name: 'Will it require services team to retain customer?'},
-			    {name: 'Is expected churn high or low?'},
-			    ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="answer 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-        </md-content>
-      </md-tab>
-
-      <md-tab label="other" md-on-select="changeTab('other');"
-              md-active="editorSettings.tab === 'other'">
-        <md-content class="md-padding">
-	  <md-list>
-            <h3>Regulatory/Data Privacy</h3>
-            <div layout="row"
-                 ng-repeat="item in [
-			    {name: 'Are there regulations that you will have to fight?'}, 
-			    {name: 'Do you have to comply with FTC/HIPAA?'},
-			    ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="answer 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-
-	  <md-list>
-            <h3>Timing</h3>
-            <div layout="row"
-                 ng-repeat="item in [
-			    {name: 'Why now?'}, 
-			    {name: 'Will it be too late if you wait for 2 years to start this?'},
-			    ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="answer 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-        </md-content>
       </md-tab>
 
     </md-tabs>

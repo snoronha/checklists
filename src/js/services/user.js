@@ -258,6 +258,22 @@
                 );
             };
 
+            this.getChecklist = function( listName, successCallback, errorCallback ) {
+                var url = '/v1/users/checklist/' + listName;
+                $http({ method: 'GET', url: url, headers: {'Content-Type': 'application/json'} }).then(
+                    function( response ) {
+                        if ( angular.isFunction( successCallback )) {
+                            successCallback( response );
+                        }
+                    },
+                    function( response ) {
+                        if ( angular.isFunction( errorCallback )) {
+                            errorCallback( response );
+                        }
+                    }
+                );
+            };
+
             this.getSetupCode = function( language ) {
                 var setup = {
                     javascript: [

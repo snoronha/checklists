@@ -2,86 +2,24 @@
 
 <div layout="row" ng-cloak>
 
-
   <md-content flex-offset="5" flex="90" layout-padding>
     
     <md-tabs md-dynamic-height md-border-bottom>
 
-      <md-tab label="buy home" md-on-select="changeTab('buy home');"
-              md-active="! editorSettings.tab || editorSettings.tab === 'buy home'">
-
-        <div layout="row">
-          <md-input-container flex="100" class="md-block">
-          </md-input-container>
-        </div>
-        
-        
-        <div layout="row" flex="100" layout-align="center center">
-          <md-button class="md-raised md-primary">
-            <span>Submit</span>
-          </md-button>
-        </div>
-
-      </md-tab>
-
-      <md-tab label="startup checklist" md-on-select="changeTab('startup checklist');"
-              md-active="editorSettings.tab === 'startup checklist'">
-        <md-content class="md-padding">
-
-          <md-list>
-            <h3>Team</h3>
-            <div layout="row"
-                          ng-repeat="item in [
-				     {name: 'Is it an A+ team?'}, 
-				     {name: 'Does team have relevant experience?'},
-				     {name: 'Is team complete?'},
-				     {name: 'Can this team hire people?'},
-				     {name: 'Is this colocated?'},
-				     {name: 'Is team located is location of primary market?'},
-				     {name: 'Will you have to hire CEO?'},
-				     {name: 'Is team committed to working full-time on this?'},
-				     {name: 'Reference check on the team'},
-				     {name: 'Is there a prior relationship with team?'},
-				     {name: 'Gaps in Founding team'},
-				     {name: 'Quality of hired team'},
-				     {name: 'Churn in team'},
-				     {name: 'Glassdoor rating of team'},
-				     {name: 'Is team motivated by personal reasons?'},
-				     {name: 'Passion of the team'},
-				     {name: 'Do you believe in values of the team?'},
-				     {name: 'Will this team be agile?'},
-				     {name: 'Can this team scale \as company grows?'},
-				     ]">
-              <div flex="70">{{ item.name }} </div>
+      <md-tab ng-repeat="(tabKey, tabVal) in editorSettings.list" label="{{tabKey}}"
+	      md-on-select="changeTab('{{tabKey}}');"
+              md-active="! editorSettings.tab || editorSettings.tab === '{{tabKey}}'">
+	<md-content class="md-padding">
+          <md-list ng-repeat="(tabName, tabData) in tabVal">
+            <h3>{{tabName}}</h3>
+            <div layout="row" ng-repeat="item in tabData">
+              <div flex="70">{{ item }} </div>
               <div flex>
-		<md-checkbox aria-label="check 1"></md-checkbox>
+		<md-checkbox aria-label="answer 1"></md-checkbox>
 	      </div>
             </div>
           </md-list>
-
-	  <md-list>
-            <h3>Market</h3>
-            <div layout="row"
-                          ng-repeat="item in [
-				     {name: 'Is it an A+ team?'}, 
-				     {name: 'Does team have relevant experience?'},
-				     {name: 'Is team complete?'},
-				     {name: 'Can this team hire people?'},
-				     {name: 'Is this colocated?'},
-				     {name: 'Is team located is location of primary market?'},
-				     {name: 'Will you have to hire CEO?'},
-				     {name: 'Is team committed to working full-time on this?'},
-				     {name: 'Reference check on the team'},
-				     {name: 'Is there a prior relationship with team?'},
-				     ]">
-              <div flex="70">{{ item.name }} </div>
-              <div flex>
-		<md-checkbox aria-label="check 2"></md-checkbox>
-	      </div>
-            </div>
-          </md-list>
-
-        </md-content>
+	</md-content>
       </md-tab>
 
     </md-tabs>

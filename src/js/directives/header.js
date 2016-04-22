@@ -9,10 +9,6 @@
                              <div class=\"md-toolbar-tools\" layout=\"row\" layout-align=\"space-between center\"> \
                                <h3 class=\"ng-binding\"><a href=\"/#/home\">Check Lists</a></h3> \
                                <div class=\"md-primary\" layout=\"row\" layout-align=\"end center\"> \
-                                 <md-button ng-href=\"#/buy_home\">Buy Home</md-button> \
-                                 <md-button ng-href=\"#/startup\">Startup</md-button> \
-                                 <md-button ng-if=\"config.isLoggedIn\" ng-click=\"logout()\">Logout</md-button> \
-                                 <md-button ng-if=\"! config.isLoggedIn\" ng-href=\"#/login\">Login</md-button> \
                                </div> \
                              </div> \
                            </md-toolbar>",

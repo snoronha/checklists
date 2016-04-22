@@ -8,11 +8,19 @@
             $scope.editorSettings = {
                 initDone: false,
                 busy: false,
-                editor: 'text',
-                language: 'javascript',
                 tab: $routeParams.tab || 'team',
+		list: null,
             };
-            
+
+            // if ( $routeParams.list_name ) { // Get problem definition
+            User.getChecklist( "startup", function( resp ) {
+                if ( resp.data ) {
+		    $log.log( resp.data );
+                    $scope.editorSettings.list = resp.data;
+                }
+            });
+            // }
+
             $scope.changeTab = function( tab ) {
                 $scope.editorSettings.tab = tab;
             };
